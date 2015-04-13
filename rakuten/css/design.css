@@ -140,7 +140,10 @@ body { background: #fbfbfb; }
 /* itemInfo
 --------------------------------------------------*/
 
-.itemInfo { padding: 10px 15px 15px; }
+.itemInfo {
+	min-height: 210px;
+	padding: 10px 15px 15px;
+}
 
 .catchCopy {
 	height: 55px;
@@ -168,7 +171,6 @@ body { background: #fbfbfb; }
 .shopName dt,
 .shopName dd { display: inline; }
 .shopName dt:after { content: "："; }
-
 
 .imageThumb {
 	float: left;
