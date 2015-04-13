@@ -91,9 +91,9 @@ $(function() {
 			itemListTemp.push('				<li class="item">');
 			itemListTemp.push('					<h1>' + js.data.trimDescription($item.itemName, 50, false) + '</h1>');
 			itemListTemp.push('					<div class="itemInfo">');
-			itemListTemp.push('						<p class="catchCopy">' + js.data.trimDescription($item.catchcopy, 60, false) + '</p>');
+			itemListTemp.push('						<p class="catchCopy">' + js.data.trimDescription($item.catchcopy, 55, false) + '</p>');
 
-			$($item.mediumImageUrls).each(function(i) {
+			$($item.mediumImageUrls).each(function() {
 
 				itemListTemp.push('						<figure class="imageThumb"><img src="' + this.imageUrl + '" /></figure>');
 
