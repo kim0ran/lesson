@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>jquery.cookie.js を使ってみた</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+body, div, section, h1, h2, h3, h4, p, dl, dt, dd, ul, li, figure, code, button {
+	margin: 0;
+	padding: 0;
+	line-height: 1.5em;
+	word-break: break-all;
+}
+body, code {
+	font-size: 75%;
+	color: #444;
+	font-family: "メイリオ", Meiryo, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "ＭＳ Ｐゴシック", "Lucida Grande", "Lucida Sans Unicode", Arial, Verdana, sans-serif;
+}
+ul, li { list-style: none; }
+#page {
+	width: 700px;
+	margin: 50px;
+}
+h1 {
+	margin-bottom: 10px;
+	font-size: 2.5em;
+	color: #999;
+}
+.notes { margin-bottom: 50px; }
+.notes dt,
+.notes dd { display: inline; }
+.notes dt:after {
+	content: "：";
+	margin-right: 5px;
+}
+.notes dd { font-weight: bold; }
+#main { position: relative; }
+.tabNav {
+	position: relative;
+	padding-left: 10px;
+	z-index: 2;
+}
+.tabNav li {
+	display: inline-block;
+	margin-right: 3px;
+}
+.tabNav li a {
+	display: inline-block;
+	padding: 10px 20px;
+	background: #eee;
+	border: 1px solid #eee;
+	border-bottom-color: #ddd;
+	border-radius: 3px 3px 0 0;
+	color: #aaa;
+	font-weight: bold;
+	text-decoration: none;
+}
+.tabNav li:not([class*="active"]) a:hover { color: #666; }
+.tabNav li.active a {
+	background: #fff;
+	border-color: #ddd;
+	border-bottom-color: #fff;
+	color: #555;
+	cursor: default;
+}
+.tabContents {
+	min-height: 480px;
+	margin-top: -1px;
+	padding: 30px 20px;
+	border: 1px solid #ddd;
+}
+.tabContents h2 {
+	font-size: 2em;
+	color: #ddd;
+}
+
+.tabContents > section:nth-last-of-type(1n+2) { margin-bottom: 30px; }
+.tabContents h3 {
+	margin: 15px 0 5px;
+	font-size: 16px;
+	color: #777;
+}
+
+.tabContents code {
+	display: block;
+	padding: 10px 15px;
+	background: #eee;
+	font-size: 12px;
+}
+.tabContents code + code { margin-top: 1px; }
+.option h4 {
+	margin: 15px 15px 5px;
+	font-size: 14px;
+	color: #777;
+}
+.option dl { margin-left: 15px; }
+.option dt,
+.option dd { margin-bottom: 5px; }
+.option dt {
+	clear: left;
+	float: left;
+	width: 5em;
+	font-weight: bold;
+}
+.option dd { overflow: hidden; }
+.option dd:before { content: "："; }
+.list { border-top: 1px dotted #ddd; }
+.list li {
+	list-style: square inside;
+	border-bottom: 1px dotted #ddd;
+}
+.list li a {
+	display: block;
+	position: relative;
+	padding: 8px 10px;
+	text-decoration: none;
+}
+.list li a:hover { background: #f6fcff; }
+.list li a:hover:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 12px;
+	right: 7px;
+	width: 6px;
+	height: 6px;
+	border-top: 3px solid #ddd;
+	border-right: 3px solid #ddd;
+	-webkit-transform: rotate(45deg);
+}
+
+.btnDelete {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 5px;
+	z-index: 5;
+	padding: 5px 20px;
+	background: #aaa;
+	border: none;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #fff;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 #999;
+	cursor: pointer;
+}
+.btnDelete:hover { opacity: 0.8; }
+</style>
+</head>
+<body>
+
+<div id="page">
+
+	<h1>jquery.cookie.js を使ってみた</h1>
+	<dl class="notes">
+		<dt>今保存されているCookie情報</dt>
+		<dd></dd>
+	</dl>
+
+	<main id="main">
+		<ul class="tabNav">
+			<li><a href="#contents1">コンテンツ1</a></li>
+			<li><a href="#contents2">コンテンツ2</a></li>
+			<li><a href="#contents3">コンテンツ3</a></li>
+		</ul>
+		<section class="tabContents" id="contents1">
+			<h2>#contents1</h2>
+
+			<section>
+				<h3>cookieを保存</h3>
+				<code>$.cookie('cookieの名前', '値');</code>
+				<code>$.cookie('cookieの名前', { expires: 7 , path: '/', domain: 'example.com' , secure: true });</code>
+				<div class="option">
+					<h4>オプション</h4>
+					<dl>
+						<dt>expires</dt>
+						<dd>保存する期間</dd>
+						<dt>path</dt>
+						<dd>保存するパス名を指定</dd>
+						<dt>domain</dt>
+						<dd>有効となるドメインを指定</dd>
+						<dt>secure</dt>
+						<dd>セキュアな通信のときのみ送信</dd>
+					</dl>
+				</div>
+			</section>
+			<section>
+				<h3>cookieの取得</h3>
+				<code>$.cookie('cookieの名前');</code>
+			</section>
+			<section>
+				<h3>cookieの削除</h3>
+				<code>$.removeCookie('cookieの名前');</code>
+			</section>
+		</section>
+		<section class="tabContents" id="contents2">
+			<h2>#contents2</h2>
+			<section>
+				<h3>使用例</h3>
+				<ul class="list">
+					<li><a href="http://www.jalan.net/kankou/130000/?afCd=&rootCd=&screenId=OUW1211" target="_blank">じゃらん 観光ガイド</a></li>
+					<li><a href="http://www.sozaijiten.com/sozaijiten.asp?vol=235" target="_blank">素材辞典</a></li>
+				</ul>
+			</section>
+		</section>
+		<section class="tabContents" id="contents3">
+			<h2>#contents3</h2>
+			<section>
+				<h3>ふ～ぐたくぅん</h3>
+				<figure><img src="http://p.twpl.jp/show/large/7po8h" height="300" alt=""><figure>
+			</section>
+		</section>
+
+		<button class="btnDelete">Cookieを削除</button>
+	</main>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script>
+$(function() {
+
+	/**
+	 * 実行処理
+	 */
+	var init = function() {
+
+		/** 保存中のCookie情報を表示 */
+		notesText();
+
+		/** タブ連動コンテンツ */
+		tabContents($('.tabNav'), $('.tabContents'));
+
+		// Cookieを削除
+		$('.btnDelete').off('click');
+		$('.btnDelete').on('click', function() {
+
+			// Cookieを削除
+			$.removeCookie('activeTab');
+
+			/** 保存中のCookie情報を表示 */
+			notesText();
+		});
+
+	};
+
+	/**
+	 * 保存中のCookie情報を表示
+	 */
+	var notesText = function() {
+		$('.notes dd').text($.cookie('activeTab') ? $.cookie('activeTab') : 'undefined');
+	};
+
+	/**
+	 * タブ連動コンテンツ
+	 * param@ $nav: タブ要素
+	 * param@ $contents: 連動させるコンテンツ要素
+	 */
+	var tabContents = function($nav, $contents) {
+
+		var $tabNav = $nav;
+		var $tabContents = $contents;
+		var ACTIVE_CLASS = 'active';
+
+		// タブクリック処理
+		$tabNav.find('li a').on('click', function() {
+
+			var $this = $(this);
+			var TARGET_ID = $this.attr('href');
+			var $target = $(TARGET_ID);
+
+			// 一度タブのクラスを削除し、コンテンツを非表示
+			$tabNav.find('.' + ACTIVE_CLASS).removeClass(ACTIVE_CLASS);
+			$tabContents.hide();
+
+			// クリックしたタブにクラスを付与
+			$this.parent('li').addClass(ACTIVE_CLASS);
+			// 対象のコンテンツを表示
+			$target.show();
+
+			// 対象情報をcookieに保存
+			$.cookie('activeTab', TARGET_ID, { expires: 7 });
+
+			/** 保存中のCookie情報を表示 */
+			notesText();
+
+			return false;
+		});
+
+		// 初期表示処理
+		if(!$tabNav.find('.' + ACTIVE_CLASS).length) {
+
+			// 保存されているCookie情報を取得
+			var READ_COOKIE = $.cookie('activeTab');
+
+			if(READ_COOKIE) {
+
+				// Cookieに保存されていれば同じ属性値のコンテンツを表示
+				$tabNav.find('[href="' + READ_COOKIE + '"]').click();
+
+			} else {
+				// Cookieに保存されていなければ最初のコンテンツを表示
+				$tabNav.find('li:first-child a').click();
+			}
+		}
+
+	};
+
+	/** 初期処理 */
+	init();
+
+});
+</script>
+</body>
+</html>
