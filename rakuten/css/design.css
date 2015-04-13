@@ -1,0 +1,300 @@
+@charset "UTF-8";
+/* ===================================================================
+
+ design.css
+
+===================================================================== */
+
+/*----------------------------------------------------------
+ base
+------------------------------------------------------------*/
+
+body { background: #fbfbfb; }
+
+.inner {
+	max-width: 90%;
+	min-width: 950px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main { padding: 100px 0 50px; }
+
+
+/*----------------------------------------------------------
+ header
+------------------------------------------------------------*/
+
+.globalHeader {
+	position: fixed;
+	z-index: 5;
+	width: 100%;
+	padding: 13px 0 10px;
+	background: #bf0000;
+	border-bottom: 1px solid #666;
+	overflow: hidden;
+}
+
+.globalHeader h1 {
+	float: left;
+	padding-left: 5px;
+	font-size: 2em;
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+}
+
+.globalHeader h1 span {
+	margin-left: 15px;
+	font-size: 0.5em;
+	font-weight: normal;
+}
+
+
+/* searchArea
+--------------------------------------------------*/
+
+.search { float: right; }
+
+.search input[type="text"] {
+	width: 250px;
+	margin-right: 5px;
+	padding: 7px 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+#btnSubmit {
+	padding: 5px 15px;
+	background: -webkit-gradient(
+					linear,
+					left top, left bottom,
+					from(#fff),
+					to(#ccc)
+				);
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	color: #333;
+	font-weight: bold;
+	text-shadow: 0 1px 0 #fff;
+	cursor: pointer;
+}
+#btnSubmit:hover { opacity: 0.9; }
+
+
+/*----------------------------------------------------------
+ listHeader
+------------------------------------------------------------*/
+
+.listHeader {
+	margin-bottom: 20px;
+	padding: 0 10px 5px;
+	border-bottom: 1px solid #eee;
+	overflow: hidden;
+}
+
+.listHeader h1 {
+	display: inline;
+	margin-right: 10px;
+	font-size: 1.84em;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.searchResult {
+	display: inline;
+	font-size: 1.17em;
+	color: #777;
+}
+
+
+/*----------------------------------------------------------
+ itemList
+------------------------------------------------------------*/
+
+.itemList {
+	clear: both;
+	margin-bottom: 20px;
+	padding: 5px 0 0px 20px;
+	overflow: hidden;
+}
+
+.item {
+	float: left;
+	width: 270px;
+	margin: 0 25px 25px 0;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 0 0 3px #bbb;
+	cursor: pointer;
+}
+.item:hover { box-shadow: 0 0 5px #fd4a32; }
+
+.item h1 {
+	padding: 10px;
+	background: #eff5fa;
+	border: 1px solid #fff;
+	border-radius: 5px 5px 0 0;
+	font-size: 1.17em;
+}
+
+
+/* itemInfo
+--------------------------------------------------*/
+
+.itemInfo { padding: 10px 15px 15px; }
+
+.catchCopy {
+	height: 55px;
+	margin-bottom: 10px;
+}
+
+.itemPrice {
+	margin-bottom: 10px;
+	padding: 5px 10px 3px;
+	background: #fff0b3;
+	border: 1px solid #f9e97b;
+	border-radius: 3px;
+	color: #c33;
+	text-align: right;
+	text-shadow: 0 1px 0 #fff;
+	font-weight: bold;
+	overflow: hidden;
+}
+
+.itemPrice span {
+	margin-right: 3px;
+	font-size: 1.67em;
+}
+
+.shopName dt,
+.shopName dd { display: inline; }
+.shopName dt:after { content: "："; }
+
+
+.imageThumb {
+	float: left;
+	height: 100px;
+	margin-right: 10px;
+}
+
+.imageThumb img {
+	width: 100px;
+	height: auto;
+	border: 1px solid #eee;
+}
+
+.btnItemDetails {
+	clear: both;
+	padding-top: 10px;
+	text-align: right;
+}
+
+.btnItemDetails a {
+	display: inline-block;
+	position: relative;
+	padding: 3px 12px 3px 20px;
+	background: -webkit-gradient(
+					linear,
+					left top, left bottom,
+					from(#d65555),
+					to(#bf0000)
+				);
+	border: 1px solid #bf0000;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px #aaa;
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+	font-weight: bold;
+	text-decoration: none;
+}
+.btnItemDetails a:before {
+	content: "▲";
+	position: absolute;
+	top: 3px;
+	left: 6px;
+	-webkit-transform: rotate(90deg);
+	font-size: 10px;
+	color: #fff;
+	text-shadow: -2px 1px 0 rgba(0, 0, 0, 0.4);
+}
+.btnItemDetails a:hover { opacity: 0.8; }
+
+
+/*----------------------------------------------------------
+ pager
+------------------------------------------------------------*/
+
+.pager { text-align: center; }
+
+.pager p,
+.pager ol,
+.pager li { display: inline; }
+
+.pager p { margin: 0 5px; }
+.pager ol { margin: 0 10px; }
+.pager li { margin: 0 5px; }
+
+.pager li a {
+	display: inline-block;
+	width: 35px;
+	padding: 10px 0;
+	border: 1px solid #cecece;
+	border-radius: 3px;
+	color: #bf0000;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+}
+.pager li:not([class]) a:hover { background: #fdd; }
+
+.pager li.current a {
+	background: #bf0000;
+	border-color: #bf0000;
+	color: #fff;
+	cursor: default;
+}
+
+.pager p.desable,
+.pager p.desable a {
+	color: #888;
+	text-decoration: none;
+	cursor: default;
+}
+
+
+/*----------------------------------------------------------
+ footer
+------------------------------------------------------------*/
+
+.globalFooter {
+	padding: 20px 0;
+	border-top: 1px solid #ddd;
+	text-align: right;
+}
+
+.btnPagetop{
+	position: fixed;
+	right: 15px;
+	bottom: 15px;
+	opacity: 0.3;
+}
+.btnPagetop:hover { opacity: 0.7; }
+
+.btnPagetop a {
+	display: block;
+	padding: 45px 10px 5px;
+	background: #aaa;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+.btnPagetop a:after {
+	content: "▲";
+	position: absolute;
+	top: 5px;
+	left: 50%;
+	margin-left: -25px;
+	font-size: 50px;
+	line-height: 1em;
+}
+
