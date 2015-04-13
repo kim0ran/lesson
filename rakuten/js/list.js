@@ -13,11 +13,13 @@ $(function() {
 	 **/
 	var uiInit = function() {
 
+		// 「検索」ボタンクリック時の処理
 		$('#btnSubmit').on('click', function() {
 
 			var $searchText = $('#searchText');
 			var searchTextVal = $searchText.val();
 
+			// 「お米」以外はアラート表示
 			if(searchTextVal != 'お米') {
 
 				// フォーム内の入力テキストが「お米」以外であれば、alert表示とフォームのリセット
@@ -74,9 +76,7 @@ $(function() {
 		itemListPager.push('	<h1>「' + $('#searchText').val() + '」の検索結果</h1>');
 		itemListPager.push('	<p class="searchResult"><span>' + startCnt + '～' + lastCnt + '</span>件を表示（' + js.data.doNumberDelimite(allCnt) + '件中）</p>');
 		itemListPager.push('</header>');
-
 		$('.list').prepend(itemListPager.join(''));
-
 
 		// 商品一覧データを出力
 		var itemListTemp = [];
@@ -178,7 +178,7 @@ $(function() {
 				// desalbeクラスが付与されていればリンク無効
 				if($(this).parent('p').hasClass('desable')) return false;
 
-				alert('まだ出来てないから移動しないよ');
+				alert('まだ出来てないから移動しないよ');  // ★ページャー処理未作成
 			});
 
 		});
