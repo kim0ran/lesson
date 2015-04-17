@@ -9,3 +9,6 @@
 ##cookie
 【練習】jquery.cookie.js を使ってみた  
 [参考リンク](https://fe.lc-design.jp/1504/kimura/)
+
+##googleMap
+【練習】Google Maps API を使ってみた
