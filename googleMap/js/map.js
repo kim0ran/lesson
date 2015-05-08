@@ -53,7 +53,7 @@ $(function() {
 
 			// 表示オプション設定
 			var opts = {
-				zoom: 12,
+				zoom: 13,
 				navigationControl: false,
 				center: new google.maps.LatLng(y, x),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -66,7 +66,6 @@ $(function() {
 
 			/** 吹き出し表示 */
 			gmap.setBalloon(x, y, str);
-			gmap.setMarker(x, y);
 		},
 
 		/**
@@ -81,8 +80,6 @@ $(function() {
 
 			/** 吹き出し表示 */
 			gmap.setBalloon(x, y, str);
-			gmap.setMarker(x, y);
-
 		},
 
 		/**
@@ -104,7 +101,6 @@ $(function() {
 
 			// 吹き出しを表示
 			infowindow.open(map);
-
 		},
 
 		/**
@@ -213,6 +209,14 @@ $(function() {
 
 		/** Mapクラスを設定 */
 		gmap.loadMap();
+
+		// カセット全ての位置にマーカーを配置
+		$areaCassette.each(function() {
+
+			/** マーカー表示 */
+			var $this = $(this);
+			gmap.setMarker($this.attr('data-x'), $this.attr('data-y'));
+		});
 
 		// スクロール時の処理
 		$(window).scroll(function() {
