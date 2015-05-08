@@ -17,19 +17,52 @@
 	</header>
 
 	<main>
-
 		<h1>地図</h1>
-		<div id="mapViewArea">
-			<div class="mapView"></div>
-		</div><!--/#mapViewArea -->
 
-		<div class="btnArea ac">
-			<button class="btnMove" data-x="139.8306223" data-y="35.7640283">綾瀬</button>
-			<button class="btnMove" data-x="139.8435767" data-y="35.7636459">亀有</button>
-			<button class="btnMove" data-x="139.6702413" data-y="35.7836527">西台</button>
-			<button class="btnMove" data-x="139.7721185" data-y="35.7345177">西日暮里</button>
-		</div>
+		<div id="main">
 
+			<div id="contents">
+
+				<section class="areaCassette" id="ayase" data-x="139.8306223" data-y="35.7640283">
+					<h2>綾瀬</h2>
+					<div></div>
+				</section>
+
+				<section class="areaCassette" id="kameari" data-x="139.8435767" data-y="35.7636459">
+					<h2>亀有</h2>
+					<div></div>
+				</section>
+
+				<section class="areaCassette" id="nishidai" data-x="139.6702413" data-y="35.7836527">
+					<h2>西台</h2>
+					<div></div>
+				</section>
+
+				<section class="areaCassette" id="nishinippori" data-x="139.7721185" data-y="35.7345177">
+					<h2>西日暮里</h2>
+					<div></div>
+				</section>
+
+				<nav class="btnArea">
+					<ul>
+						<li><a href="#ayase">綾瀬</a></li>
+						<li><a href="#kameari">亀有</a></li>
+						<li><a href="#nishidai">西台</a></li>
+						<li><a href="#nishinippori">西日暮里</a></li>
+					</ul>
+				</nav>
+
+			</div><!--/#contents -->
+
+			<div id="sidebar">
+
+				<div id="mapViewArea">
+					<div class="mapView"></div>
+				</div><!--/#mapViewArea -->
+
+			</div><!--/#sidebar -->
+
+		</div><!--/#main -->
 	</main>
 
 
