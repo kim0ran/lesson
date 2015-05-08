@@ -162,14 +162,14 @@ $(function() {
 		 */
 		doMoveMap: function(scrollTop) {
 
-// ★スクロール時に一番上のカセットより上にいくとエラー
-
-
 			var cnt;
 
 			// 表示カセットが何番目かを検索するループ処理
 			for(var i=0; i<areaArray.length; i++) {
-				if(scrollTop > areaArray[i] && scrollTop < areaArray[i+1]) cnt = i;
+				if(scrollTop >= areaArray[i] && scrollTop < areaArray[i+1]) {
+					cnt = i;
+					break;
+				}
 			}
 
 			// 表示カセット番号がスクロール前のカセット番号と別であれば地図移動の処理を行う
