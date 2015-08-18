@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>課題のページ</title>
+<!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">-->
+<meta name="description" content="★概要★">
+<meta name="keywords" content="★キーワード★">
+<link rel="stylesheet" type="text/css" href="./common/css/common.css">
+<link rel="stylesheet" type="text/css" href="./common/css/design.css">
+<link rel="stylesheet" type="text/css" href="./common/css/contents.css">
+</head>
+<body>
+
+<div id="page">
+
+	<header class="globalHeader">
+		<div class="inner">
+			<h1>課題のページ</h1>
+			<nav class="globalNav">
+				<ul>
+					<li class="current"><a href="#">コンテンツ</a></li>
+					<li><a href="#">コンテンツ</a></li>
+					<li><a href="#">トップ</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="inner">
+
+			<div class="contents">
+				<header>
+					<h2>ページタイトル</h2>
+					<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+				</header>
+
+				<article id="crossfade">
+					<h1>クロスフェード</h1>
+					<p>
+						よくトップページのメインビジュアルとかで使われてるやつです。<br>
+						スライドタイプだったり、近くにサムネイルが付いていたりとか、いろんなパターンがありますが、とりあえず簡単なやつを。
+					</p>
+
+					<section class="sample">
+						<h2 class="acdHead opened">サンプル</h2>
+						<div class="acdBody">
+							<ul class="crossfade">
+								<li><span>PHOTO 01</span></li>
+								<li><span>PHOTO 02</span></li>
+								<li><span>PHOTO 03</span></li>
+								<li><span>PHOTO 04</span></li>
+								<li><span>PHOTO 05</span></li>
+							</ul>
+						</div>
+					</section><!--/.sample -->
+
+					<p>
+						処理中に高さの計算とかしててクローズ状態だと高さが取れないので、このサンプルはオープン状態にしています。<br>
+						サンプルはとりあえず切り替わるのだけわかるように、spanをinline-blockで色違いで出しています。
+					</p>
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>HTML</dd>
+						<dd>CSS</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>
+							要素のクラス名またはID名を変更しなければ、そのままコピペで大丈夫です。<br>
+							タイムゾーンに変換する関数いらないかなと思ったけど、正確に取りたかったので一応。
+						</p>
+
+						<h2>HTML</h2>
+						<p>
+							なるべくHTML内で最終日指定ができるようにしました。<br>
+							date-time属性に、timeタグのdatetime属性と同じルールで日付を入れて、親要素にクラス名「countdown」を入れるだけです。
+						</p>
+
+						<div class="source">
+							<code>
+								<ul class="crossfade">
+									<li>画像とか</li>
+									<li>画像とか</li>
+									<li>画像とか</li>
+									<li>画像とか</li>
+									<li>画像とか</li>
+								</ul>
+							</code>
+						</div>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#crossfade -->
+
+			</div><!--/.contents -->
+
+			<div class="sidebar">
+
+				<section class="nav">
+					<h2 class="btnNav">NAVIGATION</h2>
+					<h3>コンテンツ一覧</h3>
+					<ul>
+						<li><a href="#crossfade">クロスフェード</a></li>
+						<li><a href="#crossfade">セクション</a></li>
+						<li><a href="#crossfade">セクション</a></li>
+						<li><a href="#crossfade">セクション</a></li>
+						<li><a href="#crossfade">セクション</a></li>
+						<li><a href="#crossfade">セクション</a></li>
+					</ul>
+					<p class="btnPagetop"><a href="#page">▲ PAGETOP</a></p>
+				</section>
+
+			</div><!--/.sidebar -->
+
+		</div><!--/.inner -->
+	</main>
+
+	<footer class="globalFooter">
+		<div class="inner">
+			<p class="copyright"><small>&copy; POWERED BY ORE.</small></p>
+		</div>
+	</footer>
+
+</div><!--/#page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="./common/js/common.js"></script>
+<script src="./common/js/top.js"></script>
+</body>
+</html>

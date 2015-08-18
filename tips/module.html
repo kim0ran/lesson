@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>モジュール - jQuery Tips</title>
+<!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">-->
+<meta name="description" content="★概要★">
+<meta name="keywords" content="★キーワード★">
+<link rel="stylesheet" type="text/css" href="./common/css/common.css">
+<link rel="stylesheet" type="text/css" href="./common/css/design.css">
+<link rel="stylesheet" type="text/css" href="./common/css/contents.css">
+</head>
+<body>
+
+<div id="page">
+
+	<header class="globalHeader">
+		<div class="inner">
+			<h1>jQuery Tips</h1>
+			<nav class="globalNav">
+				<ul>
+					<li><a href="./plugin.html">プラグイン</a></li>
+					<li class="current"><a href="./module.html">モジュール</a></li>
+					<li><a href="./">トップ</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="inner">
+
+			<div id="contents">
+				<header>
+					<h2>モジュール一覧</h2>
+					<p>ああああああああああああああああああああああああああああああ</p>
+				</header>
+
+				<article id="zeroPadding">
+					<h1>ゼロ埋め</h1>
+					<p>数字の桁数を合わせたりするときに使うやつです。</p>
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>JavaScript</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>
+							出力文字数を引数で渡せるようにしました。<br>
+							桁数固定であれば、引数で渡さずに関数内に入れちゃってもいいと思います。
+						</p>
+
+						<div class="source">
+							<code>
+								/**
+								 * ゼロ埋め
+								 * param@ num: 数字
+								 * param@ len: 出力文字数
+								 */
+								var zeroPadding = function(num, len) {
+
+									// 数字の文字数
+									var numLen = String(num).length;
+
+									// 数字の文字数が出力文字数より少なければ処理を実行
+									if(numLen < len) {
+
+										// 足りない文字カウント分'0'を追記
+										var addZero = '';
+										for(var i=0; i<(len - numLen); i++) {
+											addZero = addZero + '0';
+										}
+										num = (addZero + num);
+									}
+
+									return num;
+								};
+
+								/** ゼロ埋め */
+								zeroPadding(12, 3);  // 012
+
+							</code>
+						</div>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#zeroPadding -->
+
+				<article id="numberDelimite">
+					<h1>数値のカンマ区切り</h1>
+					<p>金額表示とか、そういうやつに使うと思います。</p>
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>JavaScript</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>処理自体は簡単だけど、よく使う気がする</p>
+
+						<div class="source">
+							<code>
+								/**
+								  * 数値をカンマ区切りする
+								  * param@ num: 数値
+								 **/
+								var doNumberDelimite = function(num) {
+
+									return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+								};
+
+								/** 数値をカンマ区切りする */
+								doNumberDelimite(1234567);  // 1,234,567
+
+							</code>
+						</div>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#numberDelimite -->
+
+				<article id="timeFormat">
+					<h1>日付フォーマット変換</h1>
+					<p>8桁の数字を日付のフォーマットに変換します。</p>
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>JavaScript</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>日付の情報としていろいろカスタマイズできるように、一度タイムゾーンに変換してます。</p>
+
+						<div class="source">
+							<code>
+								/**
+								 * 文字列を年月日のフォーマットに変換
+								 * param@ timeData: 文字列
+								 */
+								var timeFormatString = function(timeData) {
+
+									/**
+									 * 年月日データをフォーマットに変換
+									 */
+									var setTimeFormat = function() {
+
+										/** 年月日の文字列をタイムゾーンに変換 */
+										var newData = formatTimezoon(timeData)
+
+										// 曜日の表示文字列を設定
+										var week = ['日', '月', '火', '水', '木', '金', '土'];
+
+										// 分解した年月日を結合
+										var rtnStr = [];
+										rtnStr.push(newData.getFullYear() + '年');
+										rtnStr.push((newData.getMonth() + 1) + '月');
+										rtnStr.push(newData.getDate() + '日');
+										rtnStr.push('（' + week[newData.getDay()] + '）'); // 曜日
+
+										return rtnStr.join('');
+									};
+
+									/**
+									 * 年月日の文字列をタイムゾーンに変換
+									 * param@ timeData: 文字列
+									 */
+									var formatTimezoon = function(timeData) {
+
+										// 文字列に変換
+										var getStr = String(timeData);
+
+										// 変換フォーマット
+										var timeFormat = 'yyyymmddHHMMSSFFF';
+
+										// 初期値を設定
+										var year = 1990, month = 01, date = 01, hour = '00', minute = '00', second = '00', millisecond = '000';
+
+										// 文字列を変換フォーマットに変換
+										var set;
+										set = timeFormat.indexOf('yyyy');
+										if(set > -1) year = getStr.substr(set, 4);
+
+										set = timeFormat.indexOf('mm');
+										if(set > -1) month = Number(getStr.substr(set, 2)) - 1;
+
+										set = timeFormat.indexOf('dd');
+										if(set > -1) date = getStr.substr(set, 2);
+
+										set = timeFormat.indexOf('HH');
+										if(set > -1) hour = getStr.substr(set, 2);
+
+										set = timeFormat.indexOf('MM');
+										if(set > -1) minute = getStr.substr(set, 2);
+
+										set = timeFormat.indexOf('SS');
+										if(set > -1) second = getStr.substr(set, 2);
+
+										// タイムゾーンに変換して返す
+										return new Date(year, month, date, hour, minute, second, millisecond);
+									};
+
+									/** 年月日データをフォーマットに変換 */
+									setTimeFormat();
+								};
+
+								/** 文字列を年月日のフォーマットに変換 */
+								timeFormatString(20150525);  // 2015年5月25日（月）
+
+							</code>
+						</div>
+
+						<p>曜日がいらなければ、23行目をコメントアウトするだけでいいです。</p>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#timeFormat -->
+
+			</div><!--/#contents -->
+
+			<div id="sidebar">
+
+				<section id="nav">
+					<h2 id="navTitle">NAVIGATION</h2>
+					<h3>コンテンツ一覧</h3>
+					<ul>
+						<li><a href="#zeroPadding">ゼロ埋め</a></li>
+						<li><a href="#numberDelimite">数値のカンマ区切り</a></li>
+						<li><a href="#timeFormat">日付フォーマット変換</a></li>
+					</ul>
+					<p class="btnPagetop"><a href="#page">▲ PAGETOP</a></p>
+				</section>
+
+			</div><!--/#sidebar -->
+
+		</div><!--/.inner -->
+	</main>
+
+	<footer class="globalFooter">
+		<div class="inner">
+			<p class="copyright"><small>&copy; POWERED BY ORE.</small></p>
+		</div>
+	</footer>
+
+</div><!--/#page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="./common/js/common.js"></script>
+<script src="./common/js/contents.js"></script>
+</body>
+</html>

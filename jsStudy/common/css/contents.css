@@ -1,0 +1,118 @@
+@charset "UTF-8";
+/* ===================================================================
+
+ contents.css
+
+======================================================================*/
+
+/*----------------------------------------------------------
+ source
+------------------------------------------------------------*/
+
+.sourceCode {
+	margin-bottom: 30px;
+	padding: 1px 0 1px 50px;
+	background: #eaeaea;
+}
+
+.sourceCode .codeBody { list-style: decimal; }
+
+.sourceCode .codeInfo,
+.sourceCode .codeBody li {
+	min-height: 1.5em;
+	padding-left: 15px;
+	padding-right: 15px;
+	background: #fafafa;
+	border-left: 3px solid #ccc;
+}
+
+.sourceCode .codeInfo {
+	padding-top: 7px;
+	padding-bottom: 5px;
+	font-size: 10px;
+	color: #cfcfcf;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.sourceCode .codeBody li {
+	padding-top: 0.2em;
+	font-size: 0.84em;
+	letter-spacing: 0.1em;
+}
+.sourceCode .codeBody li.even { background: #fff; }
+
+.sourceCode .codeBody .comment { color: #999; }
+
+
+/*----------------------------------------------------------
+ countdown
+------------------------------------------------------------*/
+
+.countdown { font-size: 1.17em; }
+
+.countdown span {
+	margin: 0 7px;
+	font-size: 1.43em;
+	color: #c33;
+	font-weight: bold;
+}
+
+
+/*----------------------------------------------------------
+ crossfade
+------------------------------------------------------------*/
+
+.crossfade li { width: 100%; }
+
+.crossfade li span {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 150px 0;
+	border: 2px solid #ddd;
+	font-size: 2em;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 #bbb;
+}
+
+.crossfade li:nth-of-type(1) span { background: #eee; }
+.crossfade li:nth-of-type(2) span { background: #039; }
+.crossfade li:nth-of-type(3) span { background: #c33; }
+.crossfade li:nth-of-type(4) span { background: #090; }
+.crossfade li:nth-of-type(5) span { background: #cc3; }
+
+#crossfadeThumb {
+	position: absolute;
+	right: 15px;
+	bottom: 15px;
+	z-index: 2;
+}
+
+#crossfadeThumb li {
+	display: inline;
+	margin-left: 5px;
+}
+#crossfadeThumb li a {
+	color: #fff;
+	text-decoration: none;
+	text-shadow: 0 0 3px #fff;
+}
+#crossfadeThumb li.active a,
+#crossfadeThumb li a:hover { color: #039; }
+
+
+/*----------------------------------------------------------
+ main
+------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------
+ footer
+------------------------------------------------------------*/
+
+
+

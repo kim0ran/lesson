@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>プラグイン - jQuery Tips</title>
+<!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">-->
+<meta name="description" content="★概要★">
+<meta name="keywords" content="★キーワード★">
+<link rel="stylesheet" type="text/css" href="./common/css/common.css">
+<link rel="stylesheet" type="text/css" href="./common/css/design.css">
+<link rel="stylesheet" type="text/css" href="./common/css/contents.css">
+</head>
+<body>
+
+<div id="page">
+
+	<header class="globalHeader">
+		<div class="inner">
+			<h1>jQuery Tips</h1>
+			<nav class="globalNav">
+				<ul>
+					<li class="current"><a href="./plugin.html">プラグイン</a></li>
+					<li><a href="./module.html">モジュール</a></li>
+					<li><a href="./">トップ</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<div class="inner">
+
+			<div id="contents">
+				<header>
+					<h2>プラグイン一覧</h2>
+					<p>ああああああああああああああああああああああああああああああ</p>
+				</header>
+
+				<article id="accordion">
+					<h1>アコーディオン</h1>
+					<p>
+						特にスマホでよく見る、コンテンツの開閉のやつ。<br>
+						初期時に閉じてる状態、開いてる状態を自由に設定できます。
+					</p>
+
+					<section class="sample">
+						<h2 class="acdHead">サンプル</h2>
+						<div class="acdBody">
+
+							<div class="sampleAcd">
+								<dl>
+									<dt class="acdHead">見出し</dt>
+									<dd class="acdBody">内容</dd>
+								</dl>
+								<dl>
+									<dt class="acdHead opened">見出し</dt>
+									<dd class="acdBody">内容</dd>
+								</dl>
+							</div>
+
+						</div>
+					</section><!--/.sample -->
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>HTML</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>クリック要素や開閉要素のクラス名またはID名を変更しなければ、そのままコピペで大丈夫です。</p>
+
+						<div class="source">
+							<code>
+								/**
+								 * アコーディオン
+								 */
+								var accordion = function() {
+
+									var $acdHead = $('.acdHead');  // クリック要素
+									var $acdBody = $('.acdBody');  // 開閉要素
+									var OPENED_CLASS = 'opened';  // 開閉要素が開いている時にクリック要素に付与するクラス名
+
+									// クリック要素のカーソルをポインターに
+									$acdHead.css('cursor', 'pointer');
+
+									// 初期時はクラスが付与されていない本体を非表示
+									$acdHead.not('.' + OPENED_CLASS).next($acdBody).hide();
+
+									// ボタンクリック時の処理
+									$acdHead.on('click', function() {
+
+										var $this = $(this);
+
+										// クラス付与、削除の切り替え
+										$this.toggleClass(OPENED_CLASS);
+
+										// 本体の表示、非表示の切り替え
+										$this.next($acdBody).slideToggle();
+									});
+
+								};
+
+								// 着火
+								accordion();
+							</code>
+						</div>
+
+						<h2>HTML</h2>
+						<p>
+							見出し要素にクラス名「acdHead」、出したりしまったりする要素にクラス名「acdBody」を入れるだけ。<br>
+							注意点としては、この二つの要素は隣接させてください。
+						</p>
+						<p>初期時に開いてる状態にしたいときは、見出し要素にクラス名「opened」を付けてください。</p>
+						<div class="source">
+							<code>
+								<!-- 最初は閉じてる状態 -->
+								<div class="acdHead">見出し</div>
+								<div class="acdBody">内容</div>
+
+								<!-- 最初から開いてる状態 -->
+								<div class="acdHead opened">見出し</div>
+								<div class="acdBody">内容</div>
+							</code>
+						</div>
+						<p>
+							開いてるときは、見出し要素に「opened」のクラスがつきます。<br>
+							逆に閉じてるときは、「opened」のクラスがなくなります。<br>
+							開閉状態によってデザインを変えるときに便利です。
+						</p>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#accordion -->
+
+				<article id="switchContents">
+					<h1>タブ切り替えコンテンツ</h1>
+					<p>
+						ページ遷移ではなく、同ページで情報を切り替えたいとき等に使えます。<br>
+						遷移による読み込み時間の削減や、SEOなんかでそういうときとかあると思うんです。
+					</p>
+
+					<section class="sample">
+						<h2 class="acdHead">サンプル</h2>
+						<div class="acdBody">
+							<ul class="tabNav">
+								<li><a href="#contents1">コンテンツ1</a></li>
+								<li><a href="#contents2">コンテンツ2</a></li>
+								<li><a href="#contents3">コンテンツ3</a></li>
+							</ul>
+							<section id="contents1" class="tabContents">
+								<h3>コンテンツ1</h3>
+								<p>コンテンツ1の内容とかとか</p>
+							</section>
+							<section id="contents2" class="tabContents">
+								<h3>コンテンツ2</h3>
+								<p>コンテンツ2の内容とかとか</p>
+							</section>
+							<section id="contents3" class="tabContents">
+								<h3>コンテンツ3</h3>
+								<p>コンテンツ3の内容とかとか</p>
+							</section>
+						</div>
+					</section><!--/.sample -->
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>HTML</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>タブ要素のクラス名またはID名を変更しなければ、そのままコピペで大丈夫です。</p>
+						<div class="source">
+							<code>
+								/**
+								 * タブ連動コンテンツ
+								 */
+								var tabContents = function() {
+
+									var $tabNav = $('.tabNav');  // タブ要素
+									var ACTIVE_CLASS = 'active'; // アクティブ時にタブ要素に付与するクラス名
+
+									// 一度全てのコンテンツを非表示
+									for(var i=0; i<$tabNav.find('a').length; i++) {
+										$($tabNav.find('a').eq(i).attr('href')).hide();
+									}
+
+									// タブクリック処理
+									$tabNav.find('li a').off('click').on('click', function() {
+
+										var $this = $(this);
+										var $target = $($this.attr('href'));
+
+										// 表示中のコンテンツを非表示にしてクラスを削除
+										var $actived = $tabNav.find('.' + ACTIVE_CLASS);
+										$($actived.find('a').attr('href')).hide();
+										$actived.removeClass(ACTIVE_CLASS);
+
+										// クリックしたタブにクラスを付与
+										$this.parent('li').addClass(ACTIVE_CLASS);
+										// 対象のコンテンツを表示
+										$target.show();
+
+										return false;
+									});
+
+									// 初期表示処理
+									if(!$tabNav.find('.' + ACTIVE_CLASS).length) {
+
+										// アクティブクラスがなければ、最初のタブの対象要素を表示
+										$tabNav.find('a:first').click();
+									}
+
+								};
+
+								// 着火
+								tabContents();
+							</code>
+						</div>
+
+						<h2>HTML</h2>
+						<p>ああああああああああああああああああああああああああああああ</p>
+						<div class="source">
+							<code>
+								<ul class="tabNav">
+									<li><a href="#contents1">コンテンツ1</a></li>
+									<li><a href="#contents2">コンテンツ2</a></li>
+									<li><a href="#contents3">コンテンツ3</a></li>
+								</ul>
+								<div id="contents1">
+									コンテンツ1の内容
+								</div>
+								<div id="contents2">
+									コンテンツ2の内容
+								</div>
+								<div id="contents3">
+									コンテンツ3の内容
+								</div>
+							</code>
+						</div>
+						<p>ああああああああああああああああああああああああああああああ</p>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#switchContents -->
+
+				<article id="scrollFixed">
+					<h1>スクロール時に要素の位置を固定</h1>
+					<p>
+						よく横のメニューとかで見る、スクロールさせるときにくっついてくるやつです。<br>
+						このページのサイドメニューで似たようなことをしているので、サンプルはないです。
+					</p>
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>HTML</dd>
+						<dd>CSS</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>固定させる要素のクラス名またはID名を変更しなければ、そのままコピペで大丈夫です。</p>
+
+						<div class="source">
+							<code>
+								/**
+								 * スクロール時に要素の位置を固定
+								 */
+								var scrollFixed = function() {
+
+									var $fixedObj = $('.fixedObj');  // 固定させる要素
+
+									// 初期位置を取得
+									var offsetTop = $fixedObj.offset().top;
+									var defaultTop = $fixedObj.css('top');
+
+									// スクロール時の処理
+									$(window).scroll(function() {
+
+										// スクロール位置を取得
+										var scrollTop = $('body').scrollTop();
+
+										// スクロール位置が要素の初期位置を超えた場合に固定
+										$fixedObj.css('top', scrollTop > offsetTop ? scrollTop : defaultTop);
+									});
+								};
+
+								/** 着火 */
+								scrollFixed();
+							</code>
+						</div>
+
+						<h2>HTML</h2>
+						<p>固定させる要素に、クラス名「fixedObj」を入れるだけです。</p>
+						<div class="source">
+							<code>
+								<div class="fixedObj"></div>
+							</code>
+						</div>
+
+						<h2>CSS</h2>
+						<p>
+							固定させる要素は、必ずposition:absolute;指定をしてください。<br>
+							位置はtopは必須で。横はleftでもrightでもどっちでもいいです。
+						</p>
+						<div class="source">
+							<code>
+								.fixedObj {
+									position: absolute;
+									top: 0;
+									left: 0;
+								}
+							</code>
+						</div>
+
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#scrollFixed -->
+
+				<article id="crossfade">
+					<h1>クロスフェード</h1>
+					<p>
+						よくトップページのメインビジュアルとかで使われてるやつです。<br>
+						スライドタイプだったり、近くにサムネイルが付いていたりとか、いろんなパターンがありますが、とりあえず簡単なやつを。
+					</p>
+
+					<section class="sample">
+						<h2 class="acdHead opened">サンプル</h2>
+						<div class="acdBody">
+							<ul class="crossfade">
+								<li><span>PHOTO 01</span></li>
+								<li><span>PHOTO 02</span></li>
+								<li><span>PHOTO 03</span></li>
+								<li><span>PHOTO 04</span></li>
+								<li><span>PHOTO 05</span></li>
+							</ul>
+						</div>
+					</section><!--/.sample -->
+
+					<p>
+						処理中に高さの計算とかしててクローズ状態だと高さが取れないので、このサンプルはオープン状態にしています。<br>
+						サンプルはとりあえず切り替わるのだけわかるように、spanをinline-blockで色違いで出しています。
+					</p>
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>HTML</dd>
+						<dd>CSS</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>
+							要素のクラス名またはID名を変更しなければ、そのままコピペで大丈夫です。<br>
+							タイムゾーンに変換する関数いらないかなと思ったけど、正確に取りたかったので一応。
+						</p>
+
+						<div class="source">
+							<code>
+								/**
+								 * クロスフェード
+								 */
+								var crossfade = function() {
+
+									var $wrap, $node, $view, $thumb;  // 要素用変数
+									var viewLen;  // 要素の数
+
+									// 変更可能変数
+									var fadeSpeed = 1500;  // アニメーションスピード
+									var switchSpeed = 4000;  // 切り替わるまでのスピード
+									var ACTIVE_CLASS = 'active';  // サムネイルに付与するアクティブクラス
+
+									/**
+									 * 初期処理
+									 */
+									var initial = function() {
+
+										$node = $('.crossfade');  // 対象要素
+										$view = $node.children();  // 子要素
+										viewLen = $view.length;  // 要素の数
+
+										// 対象要素に新たな親要素を作成
+										$node.wrapAll('<div id="crossfade"></div>');
+
+										$wrap = $('#crossfade');  // 親要素
+
+										// 親要素にCSSを追加
+										$wrap.css({
+											position: 'relative',
+											width: $view.outerWidth(),
+											height: $view.outerHeight()
+										});
+
+										// 子要素にCSSを追加
+										$view.css({
+											position: 'absolute',
+											top: 0,
+											left: 0,
+											opacity: 0
+										}).eq(0).css({
+											opacity: 1
+										});
+
+										// サムネイルを作成
+										var thumb = [];
+										thumb.push('<ul id="crossfadeThumb">');
+										for(var i=0; i&gt;viewLen; i++) {
+
+											var num = i+1;  // ID用番号
+
+											// 各子要素にIDを付与
+											$view.eq(i).attr('id', 'crossfadeNum' + num);
+
+											// アンカーに各子要素のIDを付与したサムネイルを作成
+											thumb.push('<li><a href="#crossfadeNum' + num + '">●</a></li>');
+										}
+										thumb.push('</ul>');
+
+										// 作成したサムネイルHTMLを結合して親要素内に追加
+										$wrap.append(thumb.join('')).promise().done(function() {
+
+											$thumb = $('#crossfadeThumb');  // サムネイル要素
+											$thumb.children(':first-child').addClass(ACTIVE_CLASS);
+										});
+
+									};
+
+									/**
+									 * クロスフェード処理
+									 * param@ str: 処理ストップ = 'stop'
+									 */
+									var setCrossfadeFn;
+									var crossfadeFn = function(str) {
+
+										if(str != 'stop') {
+
+											// 処理スタート
+											setCrossfadeFn = setInterval(function() {
+
+												// 表示中のインデックス番号、次のインデックス番号を取得
+												var INDEX_NUM = $thumb.find('.' + ACTIVE_CLASS).index();
+												var NEXT_NUM = (INDEX_NUM+1 > viewLen-1) ? 0 : INDEX_NUM+1;
+
+												// 次の要素を表示
+												$view.eq(INDEX_NUM).animate({ opacity: 0 }, fadeSpeed);
+												$view.eq(NEXT_NUM).animate({ opacity: 1 }, fadeSpeed);
+
+												// 表示要素の対象サムネイルにアクティブクラスを付与
+												$thumb.find('.' + ACTIVE_CLASS).removeClass(ACTIVE_CLASS);
+												$thumb.find('li').eq(NEXT_NUM).addClass(ACTIVE_CLASS);
+
+											}, switchSpeed);
+
+										} else {
+
+											// 処理ストップ
+											clearInterval(setCrossfadeFn);
+										}
+									};
+
+									/** 初期処理 */
+									initial();
+
+									/** クロスフェード処理 */
+									crossfadeFn();
+
+									// サムネイルクリック時の処理
+									$thumb.find('a').off().on('click', function() {
+
+										// クロスフェード処理を一時ストップ
+										crossfadeFn('stop');
+
+										var $this = $(this);
+										var $target = $($this.attr('href'));
+
+										// 表示切り替え
+										$view.eq($thumb.find('.' + ACTIVE_CLASS).index()).animate({ opacity: 0 }, fadeSpeed);
+										$target.animate({ opacity: 1 }, fadeSpeed, 'swing', function() {
+
+											// クロスフェード処理を再開
+											crossfadeFn();
+										});
+
+										// サムネイルのアクティブクラスを入れ替え
+										$thumb.find('.' + ACTIVE_CLASS).removeClass(ACTIVE_CLASS);
+										$this.parent('li').addClass(ACTIVE_CLASS);
+									});
+
+								};
+
+								/** 着火 */
+								crossfade();
+							</code>
+						</div>
+
+						<h2>HTML</h2>
+						<p>
+							なるべくHTML内で最終日指定ができるようにしました。<br>
+							date-time属性に、timeタグのdatetime属性と同じルールで日付を入れて、親要素にクラス名「countdown」を入れるだけです。
+						</p>
+
+						<div class="source">
+							<code>
+								<ul class="crossfade">
+									<li>画像とか</li>
+									<li>画像とか</li>
+									<li>画像とか</li>
+									<li>画像とか</li>
+									<li>画像とか</li>
+								</ul>
+							</code>
+						</div>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#crossfade -->
+
+				<article id="sorceEditer">
+					<h1>ソースコードをエディタ風UIに変換</h1>
+					<p>
+						よくいろんなサイトでソースとかコードを公開してるときに見るシマシマのやつ。<br>
+						よく見るやつは、エディタっぽく値とかの色が変わったりしてるんですが、そんな凝ったものは重いのでいらない！と思って自分で簡単なやつを作ってしまいました。
+					</p>
+					<p>最低限コメントアウト（HTML、CSS、JSのみ）だけは色変えられるようにしました。</p>
+
+					<section class="sample">
+						<h2 class="acdHead">サンプル</h2>
+						<div class="acdBody">
+							<div class="source">
+								<code>
+									/**
+									 * ユーザエージェント判定(レスポンシブ用
+									 */
+									var ua = function() {
+										
+										// bodyの幅が641px未満であればスマホ
+										return $('body').outerWidth() < 641 ? 'sp' : 'pc';
+									};
+								</code>
+							</div>
+						</div>
+					</section><!--/.sample -->
+
+					<p>
+						なるべく楽に実装できつつ、クローラー対策として処理前のHTMLソースはW3Cのルールに沿うようにしてみました。<br>
+						<small>・・・最近のクローラーはJSを見るみたいだけど。。</small>
+					</p>
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>HTML</dd>
+						<dd>CSS</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScropt</h2>
+						<p>正規表現のところが正常に表示されない場合が結構あるので、JSコードに使用するのはオススメしないです。</p>
+						<div class="source">
+							<code>
+								/**
+								 * ソースコードをエディタ風UIに変換
+								 */
+								var sourceEditer = function() {
+
+									var replaceCnt;  // インデント文字数
+									var commenting;  // コメント中かの判定用変数
+
+									/**
+									 * HTMLを生成してセット
+									 */
+									var setSource = function() {
+
+										$('.source').each(function() {
+
+											var $this = $(this);
+											var $code = $this.find('code');
+
+											// インデント文字数用変数、コメント中判定変数をリセット
+											replaceCnt = '';
+											commenting = false;
+
+											// ターゲット要素と同要素が入っていた場合は処理を行わない
+											if($this.parent().get(0).tagName == 'CODE') return;
+
+											// HTMLを取得して改行毎に分割
+											var code = $code.html().replace(/&amp;lt;/g, '<').replace(/&amp;gt;/g, '>').replace(/&amp;amp;/g, '&').split('\n');
+
+											// ソースを生成
+											var source = [];
+											source.push('<div class="sourceCode">');
+											source.push('	<p class="codeInfo">VIEW SOURCE EDITER</p>');
+											source.push('	<ol class="codeBody">');
+
+											// 分解したソースをHTML化するループ処理
+											for(var i=0; i&lt;code.length; i++) {
+
+												// 最初、最後が空の場合は削除
+												var ifFirstBreak = i==0 && code[i] == '';
+												var ifLastBreak = i==code.length-1 && code[i].indexOf('\t') > -1;
+												if(!ifFirstBreak && !ifLastBreak) {
+
+													var text = code[i];
+
+													// 1行目のインデントの文字数を取得
+													if(replaceCnt == '') {
+
+														replaceCnt = 0;
+
+														// スペース、タブ以外の文字列までをインデントとして数えるループ処理
+														forReplaceCnt:
+														for(var cnt=0; cnt&lt;text.length; cnt++) {
+
+															var firstText = text[cnt];
+
+															if(firstText == ' ') replaceCnt += 6;  // 半角スペースは「&nbsp;」1コ分
+															if(firstText == '　') replaceCnt += 12;  // 半角スペースは「&nbsp;」2コ分
+															if(firstText == '	') replaceCnt += 24;  // 半角スペースは「&nbsp;」4コ分
+
+															// 文字列になったらループを抜ける
+															if(firstText != ' ' && firstText != '　' && firstText != '	') break forReplaceCnt;
+														}
+													}
+
+													// テキストをエスケープ
+													text = text.replace(/&/g, '&amp;amp;').replace(/&lt;/g, '&amp;lt;').replace(/&gt;/g, '&amp;gt;').replace(/"/g, '&amp;quot;').replace(/'/g, '&amp;#39;');
+
+													// スペース、タブを半角スペースの特殊文字コードに変換
+													text = text.replace(/ /g, '&nbsp;').replace(/　/g, '&nbsp;').replace(/	/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
+
+													// 1行コメントをspanで囲う
+													if(text.indexOf('//') > -1 && text.indexOf('&#39;//&#39;') < 0) {
+														var cmt = text.split('//');
+														text = cmt[0] + '<span class="comment">';
+														for(var cnt=1; cnt&lt;cmt.length; cnt++) {
+															text += '//' + cmt[cnt];
+														}
+														text += '</span>';
+													}
+
+													/** 複数行コメントをspanで囲う */
+													if(text.indexOf('&lt;!--') > -1 || text.indexOf('/*') > -1 || commenting == true) text = commentOut(text);
+
+													// 配列に格納
+													source.push('		<li>' + text.slice(replaceCnt) + '</li>');
+												}
+											}
+											source.push('	</ol>');
+											source.push('</div>');
+
+											// インデント文字数用変数をリセット
+											replaceCnt = '';
+
+											// codeタグを削除して、生成したHTMLをセット
+											$code.remove();
+											$this.append(source.join('')).promise().done(function() {
+
+												// 奇数、偶数行にクラスを付与
+												$this.find('.codeBody li:even').addClass('even');
+												$this.find('.codeBody li:odd').addClass('odd');
+											});
+										});
+									};
+
+									/**
+									 * 複数行コメントをspanで囲う
+									 */
+									var commentOut = function(str) {
+
+										var string = str;
+
+										// 含まれる文字列で、コメント開始と終了を変更
+										var commentStart = '&lt;!--',
+											commentEnd = '--&gt;';
+										if(string.indexOf(commentStart) < 0 || string.indexOf(commentEnd) < 0) {
+											commentStart = '/*';
+											commentEnd = '*/';
+										}
+
+										// コメント開始箇所に開始タグを挿入
+										if(string.indexOf(commentStart) > -1 && string.indexOf('&#39;' + commentStart + '&#39;') < 0) {
+
+											var cmt = string.split(commentStart);
+											string = cmt[0] + '<span class="comment">' + commentStart + cmt[1];
+
+											// 同じ行にコメント終了なければ、行全体をspanで囲う
+											if(string.indexOf(commentEnd) < 0) {
+												string = string + '</span>';
+												commenting = true;
+											}
+
+										} else if(commenting == true) {
+
+											// コメント中であれば全文をspanで囲う
+											var cmt0 = string.slice(0, replaceCnt);
+											var cmt1 = string.slice(replaceCnt);
+											string = cmt0 + '<span class="comment">' + cmt1 + '</span>';
+										}
+
+										// コメント終了箇所に終了タグを挿入
+										if(string.indexOf(commentEnd) > -1 && string.indexOf('&#39;' + commentEnd + '&#39;') < 0) {
+
+											var cmt = string.split(commentEnd);
+											string = cmt[0] + commentEnd + '</span>' + cmt[1];
+											commenting = false;
+										}
+
+										// 変換した文字列を返す
+										return string;
+									};
+
+									/** HTMLを生成してセット */
+									setSource();
+								};
+
+								/** 着火 */
+								sourceEditer();
+							</code>
+						</div>
+
+						<h2>HTML</h2>
+						<p>
+							ソースやコードをcodeタグで囲って、親要素にクラス名「source」を付けるだけ。別にdivじゃなくてもいいです。<br>
+							codeタグの中身が表示されるようにしてあります。
+						</p>
+						<p>
+							よく、書いた通り表示させるためにpreタグで囲うのを見るんですが、preは整形済みテキストなので<br>
+							ソースコードをマークアップするならcodeタグの方がしっくりするなと思って、codeタグにしました。
+						</p>
+						<div class="source">
+							<code>
+								<div class="source">
+									<code>
+										ここにソースを書く
+									</code>
+								</div>
+							</code>
+						</div>
+
+						<h2>CSS</h2>
+						<p>デザインは自由に変えられるけど、参考までにここで使っているデザインのCSSを以下に掲載。</p>
+						<div class="source">
+							<code>
+								.sourceCode {
+									padding: 1px 0 1px 50px;
+									background: #eaeaea;
+								}
+
+								.sourceCode .codeBody { list-style: decimal; }
+
+								.sourceCode .codeInfo,
+								.sourceCode .codeBody li {
+									min-height: 1.5em;
+									padding-left: 15px;
+									padding-right: 15px;
+									background: #fafafa;
+									border-left: 3px solid #ccc;
+								}
+
+								.sourceCode .codeInfo {
+									padding-top: 7px;
+									padding-bottom: 5px;
+									font-size: 10px;
+									color: #cfcfcf;
+									font-weight: bold;
+									font-style: italic;
+								}
+
+								.sourceCode .codeBody li {
+									padding-top: 0.2em;
+									font-size: 0.84em;
+									letter-spacing: 0.1em;
+								}
+								.sourceCode .codeBody li.even { background: #fff; }
+
+								.sourceCode .codeBody .comment { color: #999; }
+							</code>
+						</div>
+
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#sorceEditer -->
+
+				<article id="daysCountdown">
+					<h1>日にちカウントダウン表示</h1>
+					<p>よくキャンペーンやイベントで使われている「あと何日」みたいなやつです。</p>
+
+					<section class="sample">
+						<h2 class="acdHead">サンプル</h2>
+						<div class="acdBody">
+							<p class="countdown">6月20日まで、あと<span date-time="2015-06-20"></span>日</p>
+						</div>
+					</section><!--/.sample -->
+
+					<dl class="listIcon">
+						<dt>カスタム</dt>
+						<dd>HTML</dd>
+					</dl>
+
+					<section class="code">
+						<h2>JavaScript</h2>
+						<p>
+							要素のクラス名またはID名を変更しなければ、そのままコピペで大丈夫です。<br>
+							タイムゾーンに変換する関数いらないかなと思ったけど、正確に取りたかったので一応。
+						</p>
+
+						<div class="source">
+							<code>
+								/**
+								 * 現在と最終日の日数差を表示
+								 */
+								var countdown = function() {
+
+									/**
+									 * 現在と最終日の日数差を計算して表示
+									 */
+									var dateReckon = function() {
+
+										var $countdown = $('.countdown');  // 親要素
+										var $target = $countdown.find('[date-time]');  // 表示要素
+
+										/** 最終日を取得してタイムゾーンに変換 */
+										var last = formatTimezoon($target.attr('date-time').replace(/-/g, ''))
+
+										// 現在の日付を取得
+										var today = new Date();
+
+										// 月から1を引いて再定義
+										last = new Date(last.getFullYear(), last.getMonth()-1, last.getDate())
+										today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
+
+										// 最終日と現在の差をミリ秒から計算
+										var diffCnt = (last - today) / ((24*60)*60*1000);
+
+										// 残り日数に置き換え
+										$target.text(diffCnt).removeAttr('date-time');
+									};
+
+									/**
+									 * 年月日の文字列をタイムゾーンに変換
+									 * param@ timeData: 文字列
+									 */
+									var formatTimezoon = function(timeData) {
+
+										// 文字列に変換
+										var getStr = String(timeData);
+
+										// 変換フォーマット
+										var timeFormat = 'yyyymmddHHMMSSFFF';
+
+										// 初期値を設定
+										var year = 1990, month = 01, date = 01, hour = '00', minute = '00', second = '00', millisecond = '000';
+
+										// 文字列を変換フォーマットに変換
+										var set;
+										set = timeFormat.indexOf('yyyy');
+										if(set > -1) year = getStr.substr(set, 4);
+
+										set = timeFormat.indexOf('mm');
+										if(set > -1) month = Number(getStr.substr(set, 2)) - 1;
+
+										set = timeFormat.indexOf('dd');
+										if(set > -1) date = getStr.substr(set, 2);
+
+										set = timeFormat.indexOf('HH');
+										if(set > -1) hour = getStr.substr(set, 2);
+
+										set = timeFormat.indexOf('MM');
+										if(set > -1) minute = getStr.substr(set, 2);
+
+										set = timeFormat.indexOf('SS');
+										if(set > -1) second = getStr.substr(set, 2);
+
+										// タイムゾーンに変換して返す
+										return new Date(year, month, date, hour, minute, second, millisecond);
+									};
+
+									/** 現在と最終日の日数差を計算して表示 */
+									dateReckon();
+								};
+
+								/** 着火 */
+								countdown();
+							</code>
+						</div>
+
+						<h2>HTML</h2>
+						<p>
+							なるべくHTML内で最終日指定ができるようにしました。<br>
+							date-time属性に、timeタグのdatetime属性と同じルールで日付を入れて、親要素にクラス名「countdown」を入れるだけです。
+						</p>
+
+						<div class="source">
+							<code><p class="countdown">6月20日まで、あと<span date-time="2015-06-20"></span>日</p></code>
+						</div>
+					</section><!--/.code -->
+
+					<ul class="listButton">
+						<li><a href="#">Git</a></li>
+					</ul>
+				</article><!--/#daysCountdown -->
+
+			</div><!--/#contents -->
+
+			<div id="sidebar">
+
+				<section id="nav">
+					<h2 id="navTitle">NAVIGATION</h2>
+					<h3>コンテンツ一覧</h3>
+					<ul>
+						<li><a href="#accordion">アコーディオン</a></li>
+						<li><a href="#switchContents">タブ切り替えコンテンツ</a></li>
+						<li><a href="#scrollFixed">スクロール時に要素の位置を固定</a></li>
+						<li><a href="#crossfade">クロスフェード</a></li>
+						<li><a href="#sorceEditer">ソースコードソースコードをエディタ風UIに変換</a></li>
+						<li><a href="#daysCountdown">日にちカウントダウン表示</a></li>
+					</ul>
+					<p class="btnPagetop"><a href="#page">▲ PAGETOP</a></p>
+				</section>
+
+			</div><!--/#sidebar -->
+
+		</div><!--/.inner -->
+	</main>
+
+	<footer class="globalFooter">
+		<div class="inner">
+			<p class="copyright"><small>&copy; POWERED BY ORE.</small></p>
+		</div>
+	</footer>
+
+</div><!--/#page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="./common/js/common.js"></script>
+<script src="./common/js/contents.js"></script>
+</body>
+</html>
