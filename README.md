@@ -12,3 +12,11 @@
 
 ##googleMap
 【練習】Google Maps API を使ってみた
+
+##tips
+【参考】今まで作ったやつをまとめてみたやつ
+[参考リンク](https://fe.lc-design.jp/sample/kimura/tips/)
+
+##jsStudy
+【勉強会用課題】JSをきれいにまとめるやつ
+[参考リンク](https://fe.lc-design.jp/sample/kimura/jsStudy/)
