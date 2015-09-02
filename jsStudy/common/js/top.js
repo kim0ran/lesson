@@ -11,15 +11,10 @@
 
 		// スムーススクロール
 		var smoothScroll = new ui.smoothScroll();
-		smoothScroll.init('a[href^="#"]');
+		smoothScroll.init('a[href^="#"]', 500);
 
-		// サイドバー表示・非表示
-		var sidebarAccordion = new ui.sidebarAccordion();
-		sidebarAccordion.set('.sidebar', '.btnNav');
-
-		// スクロール時にナビゲーションの位置を固定
-		var sidebarScrollFixed = new ui.sidebarScrollFixed();
-		sidebarScrollFixed.set('.nav', '.sidebar');
+		// サイドバー
+		ui.sidebar.init('.sidebar', '.btnNav', '.nav');
 
 	};
 	init();
