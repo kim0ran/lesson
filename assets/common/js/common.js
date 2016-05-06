@@ -7,6 +7,7 @@
 	var App = {
 		global: {},
 		fn: {},
+		ui: {},
 		utils: {},
 		views: {}
 	};
@@ -22,6 +23,9 @@
 
 	App.global = {
 
+		isScroll: false,  // スクロール中判定
+		contentsOffsetArray: []  // 各セクションの縦位置
+
 	};
 
 
@@ -33,49 +37,18 @@
 	};
 
 
+/* ui
+------------------------------------------------------------*/
+
+	App.ui = {
+
+	};
+
+
 /* utils
 ------------------------------------------------------------*/
 
 	App.utils = {
-
-		/**
-		 * 子要素の高さを合わせる
-		 */
-		matchHeight: function() {
-			var $el = {};
-			var $child = {};
-			var maxHeight = 0;
-			var init = function(el) {
-				setEl(el);
-				render();
-				return this;
-			};
-			var setEl = function(el) {
-				$el = $(el);
-				$child = $el.children();
-				return this;
-			};
-			var render = function() {
-				getHeight();
-				$child.height(maxHeight);
-				return this;
-			};
-			var getHeight = function() {
-				var array = [];
-				$child.each(function() {
-					var $this = $(this);
-					array.push($(this).outerHeight());
-				});
-				array.sort(function(a, b) {
-					if(a > b) return -1;
-					if(a < b) return 1;
-					return 0;
-				});
-				maxHeight = array[0];
-				return this;
-			};
-			return { init: init };
-		}
 
 	};
 
@@ -94,8 +67,6 @@
 				this.$anchor = {};
 				this.$imgBtn = {};
 				this.scrollSpeed = 500;
-				this.isScroll = false;
-				this.globalNavView = {};
 				return this;
 			};
 			var proto = constructor.prototype;
@@ -103,7 +74,6 @@
 				this.setEl(el);
 				this.render();
 				this.setEvents();
-				this.setCustumEvents();
 				return this;
 			};
 			proto.setEl = function(el) {
@@ -114,27 +84,36 @@
 			};
 			proto.render = function() {
 
-				/* グローバルナビ */
-				this.globalNavView = new App.views.GlobalNavView();
-				this.globalNavView.parentViewEl = this.$el;
-				this.globalNavView.init({
-					el: '.globalNav',
-					navCurrent: '.current',
-					slideSpeed: 300
+				/* ヘッダ */
+				var headerView = new App.views.HeaderView();
+				headerView.init({
+					el: '#HeaderView'
 				});
 
-				/* 子要素の高さを合わせる */
-				//var contentsList = App.utils.matchHeight();
-				//contentsList.init('.js-height');
+				/* メイン */
+				var mainView = new App.views.MainView();
+				mainView.init({
+					el: '#MainView',
+					scrollAdjust: 100
+				});
+
+				/* フッタ */
+				var footerView = new App.views.FooterView();
+				footerView.init({
+					el: '#FooterView'
+				});
 
 				return this;
 			};
 			proto.setEvents = function() {
 				var that = this;
+				$(window).resize(function() {
+					that.render();
+				});
 				this.$anchor.off('click').on('click', function() {
-					if(!that.isScroll) {
+					if(!App.global.isScroll) {
 						that.smoothScroll($(this).attr('href'));
-						that.isScroll = false;
+						App.global.isScroll = false;
 					}
 					return false;
 				});
@@ -146,7 +125,7 @@
 				return this;
 			};
 			proto.smoothScroll = function(href) {
-				this.isScroll = true;
+				App.global.isScroll = true;
 				var $target = $(href === '#' || href === '' ? 'html' : href);
 				var position = $target.offset().top;
 				$('html, body').animate({
@@ -162,17 +141,49 @@
 				$that.attr('src', (imgFile.indexOf('_on') == -1) ? imgSrc.replace(/(\.)(gif|jpg|png)/i, '_on$1$2') : imgSrc.replace(/(\_on)(.)(gif|jpg|png)/i, '$2$3'));
 				return this;
 			};
-			proto.setCustumEvents = function() {
-				var that = this;
-				this.$el.on('onAnimateGlobalNav', function(e, isOpen){
-					that.onAnimateGlobalNav(isOpen);
+			return constructor;
+		})(),
+
+		/**
+		 * ヘッダ
+		 */
+		HeaderView: (function() {
+			var constructor = function() {
+				this.$el = {};
+				return this;
+			};
+			var proto = constructor.prototype;
+			proto.init = function(args) {
+				this.setEl(args.el);
+				this.render();
+				this.setEvents();
+				return this;
+			};
+			proto.setEl = function(el) {
+				this.$el = $(el);
+				this.$nav = this.$el.find('#GlobalNavView');
+				return this;
+			};
+			proto.render = function() {
+				this.adjustViewHeight();
+
+				/* グローバルナビ */
+				var globalNavView = new App.views.GlobalNavView();
+				globalNavView.init({
+					el: '#GlobalNavView'
+				});
+
+				return this;
+			};
+			proto.adjustViewHeight = function() {
+				var navHeight = this.$nav.outerHeight();
+				this.$el.css({
+					height: $(window).height() - navHeight,
+					paddingBottom: navHeight
 				});
 				return this;
 			};
-			proto.onAnimateGlobalNav = function(isOpen) {
-				this.$el.animate({
-					left: isOpen ? 0 : '-80%'
-				});
+			proto.setEvents = function() {
 				return this;
 			};
 			return constructor;
@@ -184,16 +195,14 @@
 		GlobalNavView: (function() {
 			var constructor = function() {
 				this.$el = {};
-				this.$btn = {};
-				this.$list = {};
-				this.slideSpeed = 500;
-				this.isOpen = false;
-				this.isAnimate = false;
+				this.$nav = {};
+				this.$child = {};
+				this.currentNum = 0;
+				this.defaultPosition = 0;
 				return this;
 			};
 			var proto = constructor.prototype;
 			proto.init = function(args) {
-				this.slideSpeed = args.slideSpeed || this.slideSpeed;
 				this.setEl(args.el);
 				this.render();
 				this.setEvents();
@@ -201,28 +210,123 @@
 			};
 			proto.setEl = function(el) {
 				this.$el = $(el);
-				this.$btn = this.$el.find('.js-gNavBtn');
-				this.$list = this.$el.find('.js-gNavList');
+				this.$nav = this.$el.find('ul');
+				this.$child = this.$nav.children();
 				return this;
 			};
 			proto.render = function() {
-				this.parentViewEl.wrap('<div style="overflow: hidden;"></div>').css('left', 0);
+				this.defaultPosition = this.$el.offset().top;
 				return this;
 			};
 			proto.setEvents = function() {
 				var that = this;
-				this.$btn.off('click').on('click', function() {
-					if(!this.isAnimate) {
-						that.animateSlideNav();
-						that.isOpen = that.isOpen ? false : true;
-						that.isAnimate = false;
+				$(window).scroll(function() {
+					if(!App.global.isScroll) {
+						that.onScrollRender($(window).scrollTop());
 					}
 				});
 				return this;
 			};
-			proto.animateSlideNav = function() {
-				this.isAnimate = true;
-				this.parentViewEl.trigger('onAnimateGlobalNav', this.isOpen);
+			proto.onScrollRender = function(scrollTop) {
+				this.getContentNum(scrollTop);
+				this.setStylePosition(scrollTop);
+				this.setCurrentClass();
+				return this;
+			};
+			proto.getContentNum = function(scrollTop) {
+				for(var i=0; i<App.global.contentsOffsetArray.length; i++) {
+					if(scrollTop > App.global.contentsOffsetArray[i] && scrollTop < App.global.contentsOffsetArray[i+1]) {
+						this.currentNum = i;
+						break;
+					}
+				}
+				return this;
+			};
+			proto.setCurrentClass = function() {
+				this.$child.removeClass('current');
+				if(this.currentNum > 0) {
+					this.$child.eq(this.currentNum-1).addClass('current');
+				}
+				return this;
+			};
+			proto.setStylePosition = function(scrollTop) {
+				if(scrollTop > this.defaultPosition) {
+					this.$el.addClass('fixed');
+				} else {
+					this.$el.removeClass('fixed');
+				}
+				return this;
+			};
+			return constructor;
+		})(),
+
+		/**
+		 * メイン
+		 */
+		MainView: (function() {
+			var constructor = function() {
+				this.$el = {};
+				this.$section = {};
+				this.scrollAdjust = 0;
+				return this;
+			};
+			var proto = constructor.prototype;
+			proto.init = function(args) {
+				this.scrollAdjust = args.scrollAdjust;
+				this.setEl(args.el);
+				this.render();
+				this.setEvents();
+				return this;
+			};
+			proto.setEl = function(el) {
+				this.$el = $(el);
+				this.$section = this.$el.find('.section');
+				return this;
+			};
+			proto.render = function() {
+				this.getContentsOffsetArray();
+				return this;
+			};
+			proto.getContentsOffsetArray = function() {
+				var that = this;
+				var offsetArray = [];
+				offsetArray.push(0);
+				this.$section.each(function() {
+					offsetArray.push($(this).offset().top - that.scrollAdjust);
+				});
+				offsetArray.push(offsetArray[offsetArray.length-1]+this.$el.outerHeight());
+				App.global.contentsOffsetArray = offsetArray;
+				return this;
+			};
+			proto.setEvents = function() {
+				return this;
+			};
+			return constructor;
+		})(),
+
+		/**
+		 * フッタ
+		 */
+		FooterView: (function() {
+			var constructor = function() {
+				this.$el = {};
+				return this;
+			};
+			var proto = constructor.prototype;
+			proto.init = function(args) {
+				this.setEl(args.el);
+				this.render();
+				this.setEvents();
+				return this;
+			};
+			proto.setEl = function(el) {
+				this.$el = $(el);
+				return this;
+			};
+			proto.render = function() {
+				return this;
+			};
+			proto.setEvents = function() {
 				return this;
 			};
 			return constructor;

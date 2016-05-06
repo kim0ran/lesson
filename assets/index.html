@@ -1,153 +1,82 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
 <title>★タイトル★</title>
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta name="description" content="★概要★" />
-<meta name="keywords" content="★キーワード★" />
-<meta name="robots" content="index,follow" />
-<meta name="robots" content="noydir" />
-<meta name="robots" content="noodp" />
-<link rel="stylesheet" type="text/css" href="./common/css/common.css" />
-<link rel="stylesheet" type="text/css" href="./common/css/sub/top.css" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="★概要★">
+<meta name="keywords" content="★キーワード★">
+<link rel="stylesheet" type="text/css" href="./common/css/common.css">
+<link rel="stylesheet" type="text/css" href="./common/css/design.css">
+<link rel="stylesheet" type="text/css" href="./common/css/contents.css">
 </head>
 <body>
 
-<div class="page" id="TopView">
+<div class="page" id="PageView">
 
-    <div class="header">
-        <div class="inner">
-            <div class="header-logoMark show-pc"><img src="./common/images/header_logomark.png" alt="Croco Auto" /></div>
-            <h1 class="header-logo"><a href="./"><img src="./common/images/header_logo.png" alt="Croco Auto" /></a></h1>
-            <p class="header-info show-pc"><img src="./common/images/header_info.png" alt="03-5217-1965 営業時間" /></p>
-        </div>
-    </div><!--/.header -->
+	<header class="header" id="HeaderView">
+		<h1>TITLE</h1>
+		<nav class="globalNav" id="GlobalNavView">
+			<div class="inner">
+				<ul>
+					<li><a href="#contents1">コンテンツ1</a></li>
+					<li><a href="#contents2">コンテンツ2</a></li>
+					<li><a href="#contents3">コンテンツ3</a></li>
+					<li><a href="#contents4">コンテンツ4</a></li>
+					<li><a href="#contents5">コンテンツ5</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 
-    <div class="globalNav">
-        <div class="inner">
-            <div class="globalNav-btn show-sp js-gNavBtn"><img src="./common/images/btn_gnav_sp.png" alt="" /></div>
-            <div class="globalNav-nav js-gNavList">
-                <ul class="globalNav-nav-list">
-                    <li><a href="./" class="gnav-home">ホーム</a></li>
-                    <li><a href="./buy/" class="gnav-buy">販売</a></li>
-                    <li><a href="./assessment/" class="gnav-assessment">買取</a></li>
-                    <li><a href="./about/" class="gnav-about">クロコオートついて</a></li>
-                    <li><a href="./contact/" class="gnav-contact">お問い合わせ</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+	<main class="main" id="MainView">
 
-    <div class="topVisual">
-        <div class="inner">
-            <ul class="topVisual-images js-topVisual">
-                <li><img src="./common/images/topVisual_image01.jpg" alt="" /></li>
-                <li><img src="./common/images/topVisual_image02.jpg" alt="" /></li>
-                <li><img src="./common/images/topVisual_image03.jpg" alt="" /></li>
-                <li><img src="./common/images/topVisual_image04.jpg" alt="" /></li>
-                <li><img src="./common/images/topVisual_image05.jpg" alt="" /></li>
-            </ul>
-        </div>
-    </div><!--/.topMainVisual -->
+		<section class="section" id="contents1">
+			<div class="inner">
+				<h2>Contents1</h2>
+				<p>さんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入る</p>
+			</div>
+		</section>
 
-    <div class="main">
-        <div class="inner">
+		<section class="section" id="contents2">
+			<div class="inner">
+				<h2>Contents2</h2>
+				<p>さんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入る</p>
+			</div>
+		</section>
 
-            <div class="contentsList">
-                <div class="contentsList-section">
-                    <div class="show-pc">
-                        <h2 class="contentsList-section-title"><img src="./common/images/contentsList_title_buy.png" alt="購入をご検討のお客様" /></h2>
-                        <div class="contentsList-section-image"><img src="./common/images/contentsList_thumb_buy.jpg" alt="" /></div>
-                        <p class="contentsList-section-notes">ああああああああああああああああああああああああ</p>
-                        <div class="contentsList-section-btn"><a href="./buy/"><img src="./common/images/btn_detail.png" alt="詳しくみる" /></a></div>
-                    </div>
-                    <div class="contentsList-section-spBtn show-sp"><a href="./buy/"><img src="./common/images/contentsList_spBtn_buy.png" alt="" /></a></div>
-                </div>
-                <div class="contentsList-section">
-                    <div class="show-pc">
-                        <h2 class="contentsList-section-title"><img src="./common/images/contentsList_title_assessment.png" alt="売却をご検討のお客様" /></h2>
-                        <div class="contentsList-section-image"><img src="./common/images/contentsList_thumb_assessment.jpg" alt="" /></div>
-                        <p class="contentsList-section-notes">ああああああああああ</p>
-                        <div class="contentsList-section-btn"><a href="./assessment/"><img src="./common/images/btn_detail.png" alt="詳しくみる" /></a></div>
-                    </div>
-                    <div class="contentsList-section-spBtn show-sp"><a href="./assessment/"><img src="./common/images/contentsList_spBtn_assessment.png" alt="" /></a></div>
-                </div>
-                <div class="contentsList-section">
-                    <div class="show-pc">
-                        <h2 class="contentsList-section-title"><img src="./common/images/contentsList_title_store.png" alt="来店をご検討のお客様" /></h2>
-                        <div class="contentsList-section-image"><img src="./common/images/contentsList_thumb_store.jpg" alt="" /></div>
-                        <p class="contentsList-section-notes">ああああああああああ</p>
-                        <div class="contentsList-section-btn"><a href="./about/"><img src="./common/images/btn_detail.png" alt="詳しくみる" /></a></div>
-                    </div>
-                    <div class="contentsList-section-spBtn show-sp"><a href="./about/"><img src="./common/images/contentsList_spBtn_store.png" alt="" /></a></div>
-                </div>
-            </div><!--/.contentsList -->
+		<section class="section" id="contents3">
+			<div class="inner">
+				<h2>Contents3</h2>
+				<p>さんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入る</p>
+			</div>
+		</section>
 
-            <div class="access">
-                <h2 class="show-pc"><img src="./common/images/access_title_buy.png" alt="アクセス" /></h2>
-                <div class="access-map">
-                    <iframe style="border: 0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.437551206295!2d139.7621223515228!3d35.690848830095014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c05c6dc3857%3A0xbcb959fed2c3e9f0!2z44CSMTAxLTAwNTQg5p2x5Lqs6YO95Y2D5Luj55Sw5Yy656We55Sw6Yym55S677yR5LiB55uu77yS77yR4oiS77yTIOODjuOCouWkp-aJi-eUug!5e0!3m2!1sja!2sjp!4v1444901570965" width="100%" height="450" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-                </div>
-                <div class="access-info">
-                    <p class="access-info-title show-sp">Access</p>
-                    <p class="access-info-address">〒101-0054 東京都千代田区神田錦町1丁目21-3　ノア大手町1階</p>
-                    <p class="access-info-tel">TEL:03-5217-1965 FAX:03-5217-1966</p>
-                </div>
-            </div><!--/.access -->
+		<section class="section" id="contents4">
+			<div class="inner">
+				<h2>Contents4</h2>
+				<p>さんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入る</p>
+			</div>
+		</section>
 
-            <div class="facebook">
-                <div class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/croco2015" data-tabs="timeline" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=785297088266761&amp;height=400&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcroco2015&amp;locale=ja_JP&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false&amp;tabs=timeline">
-                    <span style="vertical-align: bottom; width: 100%; height: 400px;">
-                        <iframe name="f1bd2e084" width="1000px" height="400px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" src="http://www.facebook.com/v2.5/plugins/page.php?adapt_container_width=true&amp;app_id=785297088266761&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df18759dcec%26domain%3Dcroco-auto.com%26origin%3Dhttp%253A%252F%252Fcroco-auto.com%252Ff20eddd76c%26relation%3Dparent.parent&amp;height=400&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcroco2015&amp;locale=ja_JP&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false&amp;tabs=timeline" style="border: none; visibility: visible; width: 100%; height: 400px;" class=""></iframe>
-                    </span>
-                </div>
-            </div>
+		<section class="section" id="contents5">
+			<div class="inner">
+				<h2>Contents5</h2>
+				<p>さんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入るさんぷるテキスト入る</p>
+			</div>
+		</section>
 
-        </div>
-    </div><!--/.main -->
+	</main>
 
-    <div class="footer">
-        <div class="footer-nav">
-            <div class="inner">
-                <div class="footer-nav-snsFollow">
-                    <ul>
-                        <li><a href="#"><img src="./common/images/icon_facebook.png" alt="facebook" /></a></li>
-                        <li><a href="#"><img src="./common/images/icon_twitter.jpg" alt="twitter" /></a></li>
-                    </ul>
-                </div>
-                <div class="footer-nav-page">
-                    <ul>
-                        <li><a href="./">ホーム</a></li>
-                        <li><a href="./buy/">販売</a></li>
-                        <li><a href="./assessment/">買取</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="./about/">クロコオートについて</a></li>
-                        <li><a href="./contact/">お問い合わせ</a></li>
-                        <li><a href="./policy/">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="inner">
-                <div class="footer-copyright-logo"><img src="./common/images/footer_logo.png" alt="Croco Auto" /></div>
-                <p class="footer-copyright-copy"><small>Copyright &copy; 2016 Croco Auto. All Rights Reserved.</small></p>
-            </div>
-        </div>
-    </div><!--/.footer -->
+	<footer class="footer" id="FooterView">
+		<a href="#PageView" class="btn-pagetop js-btnPagetop">TOP</a>
+		<p><small>&copy; Powered by kim.</small></p>
+	</footer>
 
 </div><!--/.page -->
 
 <script src="./common/js/lib/jquery-2.1.1.min.js"></script>
-<script src="./common/js/lib/jquery.bxslider.min.js"></script>
 <script src="./common/js/common.js"></script>
 <script src="./common/js/sub/top.js"></script>
-<script>
-
-</script>
 </body>
 </html>
